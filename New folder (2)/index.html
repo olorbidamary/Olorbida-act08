@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIKI: Behind the Songs & Stories</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="bg-overlay"></div>
+
+
+  <header>
+    <h1>NIKI</h1>
+    <p>Behind the Songs & Stories — An Interactive Exploration of Her Music</p>
+  </header>
+
+  <div class="container">
+    <div class="image-container">
+      <img src="niki.jpg" alt="NIKI portrait" width="300">
+    </div>
+
+    <div class="panel song-selector-panel">
+      <h2>Select a Track</h2>
+      <div class="song-list">
+        <button class="song-btn active" data-song="lalalostyou">
+          <span class="track-num">01</span>
+          <div>
+            <strong>La La Lost You</strong>
+            <small>Head In The Clouds II (2019)</small>
+          </div>
+        </button>
+        <button class="song-btn" data-song="facebookfriends">
+          <span class="track-num">02</span>
+          <div>
+            <strong>Facebook Friends</strong>
+            <small>Nicole (2022)</small>
+          </div>
+        </button>
+        <button class="song-btn" data-song="backburner">
+          <span class="track-num">03</span>
+          <div>
+            <strong>Backburner</strong>
+            <small>Nicole (2022)</small>
+          </div>
+        </button>
+        <button class="song-btn" data-song="apartment">
+          <span class="track-num">04</span>
+          <div>
+            <strong>The Apartment We Won't Share</strong>
+            <small>Nicole (2022)</small>
+          </div>
+        </button>
+        <button class="song-btn" data-song="morning">
+          <span class="track-num">05</span>
+          <div>
+            <strong>Did You Like Her In The Morning?</strong>
+            <small>Buzz (2024)</small>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="panel story-panel">
+      <div id="storyContent">
+        <span class="tag">Featured Story</span>
+        <h2 id="songTitle">La La Lost You</h2>
+        <p class="lyrics-snippet" id="songSnippet">"While you're out there drinking in LA, I'm sitting here thinking..."</p>
+        <div class="story-body" id="songStory">
+          <p><strong>The Deep Meaning:</strong> "La La Lost You" explores the bittersweet reality of heartbreak compounded by geographic distance. Set against the backdrop of Los Angeles, it captures the ache of watching an ex thrive in a glamorous new city while you are left behind processing the grief of what used to be.</p>
+          <p>It touches on emotional detachment as a defense mechanism—trying to play it cool while coming to terms with the fact that someone you once knew intimately has become a distant stranger living a completely separate life.</p>
+        </div>
+      </div>
+
+        </div>
+
+        <div class="card-preview" id="cardPreview">
+          ✨ "I'll love you till the 12th of never" — NIKI
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const songs = {
+      lalalostyou: {
+        title: "La La Lost You",
+        album: "Head In The Clouds II (2019)",
+        snippet: `"While you're out there drinking in LA, I'm sitting here thinking..."`,
+        story: `<strong>The Deep Meaning:</strong> "La La Lost You" explores the bittersweet reality of heartbreak compounded by geographic distance. Set against the backdrop of Los Angeles, it captures the ache of watching an ex thrive in a glamorous new city while you are left behind processing the grief of what used to be.<br><br>It touches on emotional detachment as a defense mechanism—trying to play it cool while coming to terms with the fact that someone you once knew intimately has become a distant stranger living a completely separate life.`
+      },
+      facebookfriends: {
+        title: "Facebook Friends",
+        album: "Nicole (2022)",
+        snippet: `"Now we're just Facebook friends, watching each other's lives through a glass screen..."`,
+        story: `<strong>The Deep Meaning:</strong> "Facebook Friends" delves into the modern phenomenon of digital distance—where someone who used to share your deepest secrets is reduced to a passive social media connection.<br><br>NIKI reflects on the quiet melancholy of seeing major life milestones, birthdays, and casual updates from an ex through a phone screen, holding no lingering malice, only a soft, lingering nostalgia for a connection that slowly evaporated into silent algorithms.`
+      },
+      backburner: {
+        title: "Backburner",
+        album: "Nicole (2022)",
+        snippet: `"I'll always be your backburner, waiting for you to call..."`,
+        story: `<strong>The Deep Meaning:</strong> "Backburner" is an honest, vulnerable confession about self-sabotage in love and accepting second place just to keep someone in your life. It examines the emotional toll of settling for breadcrumbs from someone who only reaches out when it's convenient for them.<br><br>The song paints a poignant picture of knowing you deserve better, yet willingly placing your self-worth on hold because the pain of losing them completely feels far worse than the pain of being an option.`
+      },
+      apartment: {
+        title: "The Apartment We Won't Share",
+        album: "Nicole (2022)",
+        snippet: `"The apartment we won't share sits empty in my mind..."`,
+        story: `<strong>The Deep Meaning:</strong> This track mourns the unfulfilled potential of a relationship—the future plans, shared dreams, and quiet domesticity that will never come to pass.<br><br>It speaks to the specific grief of longing for a ghost of a life that was meticulously planned in conversations, but ultimately canceled. It highlights how letting go of a person also means letting go of the entire future you envisioned building together.`
+      },
+      morning: {
+        title: "Did You Like Her In The Morning?",
+        album: "Buzz (2024)",
+        snippet: `"Did you like her in the morning, when the sunlight stripped away the spell?"`,
+        story: `<strong>The Deep Meaning:</strong> From her album <em>Buzz</em>, this track deals with lingering insecurity, retroactive jealousy, and the search for authentic emotional connection over fleeting infatuation.<br><br>It asks whether a past romance was built on genuine, vulnerable intimacy—seeing someone raw in the morning light without pretense—or if it was merely a temporary illusion that faded as soon as reality set in.`
+      }
+    };
+
+    const buttons = document.querySelectorAll('.song-btn');
+    const songTitle = document.getElementById('songTitle');
+    const songSnippet = document.getElementById('songSnippet');
+    const songStory = document.getElementById('songStory');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const key = btn.getAttribute('data-song');
+        const data = songs[key];
+        
+        songTitle.textContent = data.title;
+        songSnippet.textContent = data.snippet;
+        songStory.innerHTML = data.story;
+      });
+    
+    })
+
+  </script>
+</body>
+</html>
